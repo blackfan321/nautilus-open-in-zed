@@ -1,0 +1,16 @@
+diff --git a/nautilus-open-in-zed.py b/nautilus-open-in-zed.py
+--- a/nautilus-open-in-zed.py
++++ b/nautilus-open-in-zed.py
+@@ -38,10 +38,10 @@ class OpenInZedEditorExtention(GObject.GObject, Nautilus.MenuProvider):
+         import subprocess
+         import shutil
+         import os
+-        zed = shutil.which("zed")
++        zed = shutil.which("zeditor")
+         if zed is None:
+             subprocess.run(
+-                ["notify-send", "Zed not found", "‘zed’ executable isn’t on PATH."]
++                ["notify-send", "Zed not found", "‘zeditor’ executable isn’t on PATH."]
+             )
+             return
+         if len(files) == 1 and files[0].is_directory():
