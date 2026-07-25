@@ -43,4 +43,47 @@ pacman -S git curl nautilus-python
 	sudo unlink /usr/local/bin/zed
 	# 3. restart Nautilus
 	nautilus -q
-	````
+	```
+
+## NixOS
+
+Supported architectures: `x86_64-linux` and `aarch64-linux`.
+
+You also need [nautilus-python](https://search.nixos.org/packages?channel=unstable&query=nautilus-python) and [zed-editor](https://search.nixos.org/packages?channel=unstable&query=zed-editor) installed on your system.
+
+### NixOS with flakes
+
+```nix
+{
+  inputs = {
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nautilus-open-in-zed = {
+      url = "github:hrbtk/nautilus-open-in-zed";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { nixpkgs, nautilus-open-in-zed, ... }: {
+    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
+      modules = [{
+        environment.systemPackages = [
+          nautilus-open-in-zed.packages.x86_64-linux.nautilus-open-in-zed
+        ];
+      }];
+    };
+  };
+}
+```
+
+### Home Manager
+
+```nix
+{ inputs, pkgs, ... }:
+{
+  home.packages = [
+    inputs.nautilus-open-in-zed.packages.x86_64-linux.nautilus-open-in-zed
+  ];
+}
+```
