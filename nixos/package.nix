@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "Nautilus extension that adds an context-entry for opening in Zed";
+    description = "Nautilus extension to open files and folders in Zed";
     homepage = "https://github.com/hrbtk/nautilus-open-in-zed";
     license = licenses.mit;
     platforms = platforms.linux;
